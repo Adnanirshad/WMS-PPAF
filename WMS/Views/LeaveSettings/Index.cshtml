@@ -7,102 +7,73 @@
 <a    href="~/LeaveSettings/LvQuotaList">List of Employees Leave Quotas</a><hr />
 <p class="ErorrMessage">@ViewBag.CMessage</p>
 <article class="row">
-<section class="col-md-6">
-    <div calss="col-md-8">
-        <div class="form-group">
-                <div class="radio-inline">
-                    @Html.RadioButton("RBQuotaEmpSelection", "WithFullPay", true,new { id = "byAll" }) All
-                </div>
-                <div class="radio-inline">
-                    @Html.RadioButton("RBQuotaEmpSelection", "WithHalfPay",new { id = "byEmpType" }) By Employee Type
-                </div>
-                    <div class="radio-inline">
-                    @Html.RadioButton("RBQuotaEmpSelection", "WithOutPay",new { id = "byEmp" }) By Employee
-                </div>
-        </div>
-    </div>
-    <div calss="col-md-4">
-        <div id="ByEmpNoDiv" class="row" style="display: none;">
-            <div class="row" style="margin-bottom:15px; margin-top:15px">
-                <div class="col-md-2">
-                    <label>Employee No</label>
-                </div>
-                <div class="col-md-6">
-                    <input id="EmpNo" name="EmpNo" type="text" class="form-control"/>
-                    <br />
-                    <div class="col-md-1"><input type="button" id="buttonId" value="Search"/></div>                    
-                </div>
-            </div>
-        </div>
-        <div id="ByEmpTypeDiv" class="row" style="display: none;">
-                <div class="row" style="margin-bottom:15px; margin-top:15px">
-                    <div class="col-md-2">
-                        <label>Employee Type</label>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="col-md-3 ">
-                                  @Html.DropDownList("TypeID",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
-                            </div>
-                                    
-                    </div>
-                </div>
-         </div>
-    </div>
-</section>
-<section class="col-md-6" >
-    <div class="col-md-4" style="display: none;" id="EmpInformition">
-        <div style="margin-top:10px"> 
-        <h5>Emp Name</h5>
-        <input "form-control col-md-10 btn btn-default" type="text" id="EName" />
-        </div>
-        <div style="margin-top:10px"> 
-        <h5>Father's Name</h5>
-        <input "form-control col-md-10 btn btn-default" type="text" id="EFName" />
-        </div>
-        <div style="margin-top:10px">
-        <h5>Designation</h5>
-        <input "form-control col-md-10 btn btn-default" type="text" id="EDesignation" />
-        </div>
-        <div style="margin-top:10px">
-        <h5>Unit</h5>
-        <input "form-control col-md-10 btn btn-default" type="text" id="ESection" />
-    </div>
-    </div>
-    </section>
-<section class="col-md-12" style="margin-top:2%">
-     <section class="col-md-6" >
+<section style="margin-top:1%">
+     <section class="col-md-12" >
         <div class="panel panel-default">
             <div class="panel-heading"><h4>Create Leave Quota</h4></div>
             <div class="panel-body">
                  @using (Html.BeginForm("CreateLeaveQuota", "LeaveSettings", FormMethod.Post))
                 {
-               <div>
-                    @* <div style="margin-left:15%; font-size:15px">
-                          <div class="radio"><label><input type="radio" checked value="ByEmployee" name="CreateLeaveCriteria">By Employee</label></div>
-                         <div class="radio"><label><input type="radio" value="ByEmpType" name="CreateLeaveCriteria">By Employee Type</label></div>
-                     </div>*@
-                  @*<div id="ByEmpDiv" class="desc" style="display: none;">
-                        <div class="row" style="margin-left:10%; margin-bottom:5%; margin-top:5%">
-                            <div class="col-md-3">
-                                <label>Employee No</label>
-                            </div>
-                            <div class="col-md-6">
-                                <input id="EmpNo" name="EmpNo" type="text" class="form-control"/>
-                                
+                     
+                <section class="col-md-6">
+                    <div calss="col-md-8">
+                        <div class="form-group">
+                                <div class="radio-inline">
+                                    @Html.RadioButton("RBQuotaEmpSelection", "byAll", true,new { id = "byAll" }) All
+                                </div>
+                                <div class="radio-inline">
+                                    @Html.RadioButton("RBQuotaEmpSelection", "byEmpType",new { id = "byEmpType" }) By Employee Type
+                                </div>
+                                    <div class="radio-inline">
+                                    @Html.RadioButton("RBQuotaEmpSelection", "byEmp",new { id = "byEmp" }) By Employee
+                                </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="ByEmpNoDiv" class="row" style="display: none;">
+                            <div class="row" style="margin-bottom:15px; margin-top:15px">
+                                <div class="col-md-5">
+                                    <label>Employee No</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input id="EmpNo" name="EmpNo" type="text" class="form-control"/>         
+                                </div>
+                                <div class="col-md-1"><input type="button" id="buttonId" value="Search"/></div>
                             </div>
                         </div>
-                    </div>*@
-                    @*<div id="ByEmpTypeDiv" class="desc" style="display: none;">
-                        <div class="row" style="margin-left:10%; margin-bottom:5%; margin-top:5%">
-                            <div class="col-md-3">
-                                <label>Employee Type</label>
-                            </div>
-                            <div class="col-md-6">
-                                @Html.DropDownList("TypeID",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
-                                    
-                            </div>
+                        <div id="ByEmpTypeDiv" class="row" style="display: none;">
+                                <div class="row" style="margin-bottom:15px; margin-top:15px">
+                                    <div class="col-md-5">
+                                        <label>Employee Type</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                                  @Html.DropDownList("TypeID",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
+                                    </div>
+                                </div>
+                         </div>
+                    </div>
+                </section>
+                <section class="col-md-6" >
+                    <div class="col-md-4" style="display: none;" id="EmpInformition">
+                        <div style="margin-top:10px"> 
+                        <h5>Emp Name</h5>
+                        <input "form-control col-md-10 btn btn-default" type="text" id="EName" />
                         </div>
-                    </div>*@
+                        <div style="margin-top:10px"> 
+                        <h5>Father's Name</h5>
+                        <input "form-control col-md-10 btn btn-default" type="text" id="EFName" />
+                        </div>
+                        <div style="margin-top:10px">
+                        <h5>Designation</h5>
+                        <input "form-control col-md-10 btn btn-default" type="text" id="EDesignation" />
+                        </div>
+                        <div style="margin-top:10px">
+                        <h5>Unit</h5>
+                        <input "form-control col-md-10 btn btn-default" type="text" id="ESection" />
+                    </div>
+                    </div>
+                    </section>
+               <div class="col-md-12">
                     <div class="row" style="margin-left:10%; margin-bottom:1%; margin-top:5%">
                         <div class="col-md-4">
                             <label>Casual Leaves</label>
@@ -140,80 +111,6 @@
                 }
             </div>
         </div>
-     <header></header>
-       
-    </section>
-    <section class="col-md-6" >
-        <div class="panel panel-default">
-            <div class="panel-heading"><h4>Create Leave Balance New Year</h4></div>
-            <div class="panel-body">
-                 @using (Html.BeginForm("CreateLeaveQuota", "LeaveSettings", FormMethod.Post))
-                {
-                <div>
-                    @* <div style="margin-left:15%; font-size:15px">
-                          <div class="radio"><label><input type="radio" checked value="ByEmployee" name="CreateLeaveCriteria">By Employee</label></div>
-                         <div class="radio"><label><input type="radio" value="ByEmpType" name="CreateLeaveCriteria">By Employee Type</label></div>
-                     </div>*@
-                   @* <div id="ByEmpDiv" class="desc" style="display: none;">
-                        <div class="row" style="margin-left:10%; margin-bottom:5%; margin-top:5%">
-                            <div class="col-md-3">
-                                <label>Employee No</label>
-                            </div>
-                            <div class="col-md-6">
-                                <input id="EmpNo" name="EmpNo" type="text" class="form-control"/>
-                                    
-                            </div>
-                        </div>
-                    </div>*@
-                    @*<div id="ByEmpTypeDiv" class="desc" style="display: none;">
-                        <div class="row" style="margin-left:10%; margin-bottom:5%; margin-top:5%">
-                            <div class="col-md-3">
-                                <label>Employee Type</label>
-                            </div>
-                            <div class="col-md-6">
-                                @Html.DropDownList("TypeID",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
-                                    
-                            </div>
-                        </div>
-                    </div>*@
-                    <div class="row" style="margin-left:10%; margin-bottom:1%; margin-top:5%">
-                        <div class="col-md-4">
-                            <label>Casual Leaves</label>
-                        </div>
-                        <div class="col-md-4">
-                            <input id="CLeaves" name="CLeaves" type="number" class="form-control"/>
-                                    
-                        </div>
-                    </div>
-                    <div class="row" style="margin-left:10%; margin-bottom:1%">
-                        <div class="col-md-4">
-                            <label>Annual Leaves</label>
-                        </div>
-                        <div class="col-md-4">
-                           <input id="ALeaves" name="ALeaves" type="number" class="form-control"/>
-                        </div>
-                    </div>
-                    <div class="row" style="margin-left:10%; margin-bottom:1%">
-                        <div class="col-md-4">
-                            <label>Sick Leaves</label>
-                        </div>
-                        <div class="col-md-4">
-                            <input id="SLeaves" name="SLeaves" type="number" class="form-control"/>
-                                    
-                        </div>
-                    </div>
-                </div>
-                <div class="row" style="margin-left:10%; margin-bottom:3%">
-                    <div class="col-md-4">
-                    </div>
-                    <div class="col-md-4">
-                        <input type="submit" value="Save"  class="btn btn-xs btn-success"/>
-                    </div>
-                </div>
-                }
-            </div>
-        </div>
-     <header></header>
        
     </section>
 </section>

@@ -1,6 +1,4 @@
-﻿@*@model IEnumerable<WMS.Controllers.LeaveQuotaModel>*@
-@model PagedList.IPagedList<WMS.Controllers.LeaveQuotaModel>
-@using PagedList.Mvc;
+﻿@model IEnumerable<WMS.Controllers.LeaveQuotaModel>
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "Leave Quota";
@@ -70,9 +68,5 @@
 }
 
 </table>
- <div class="form-inline">
-          <div class="form-group ">@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))</div>
-          <div class="form-group pull-right">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</div>
-     </div>
-
+ 
 

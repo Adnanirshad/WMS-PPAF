@@ -82,8 +82,29 @@ namespace WMS.Controllers
             }
         }
 
+        private void AdjustLeaves()
+        {
+            using (var mydb = new TAS2013Entities())
+            {
+                List<LvApplication> lvApps = new List<LvApplication>();
+                lvApps = mydb.LvApplications.ToList();
+                foreach (var lv in lvApps)
+                {
+                    string empLvYear = lv.EmpID.ToString()+lv.LeaveTypeID.ToString()+"2016";
+                    List<LvConsumed> lvcon = new List<LvConsumed>();
+                    lvcon = mydb.LvConsumeds.Where(aa => aa.EmpID == lv.EmpID && aa.EmpLvTypeYear == empLvYear).ToList();
+                    if (lvcon.Count > 0)
+                    {
+                        lvcon.FirstOrDefault().YearRemaining = lvcon.FirstOrDefault().YearRemaining - lv.NoOfDays;
+                        lvcon.FirstOrDefault().GrandTotalRemaining = lvcon.FirstOrDefault().GrandTotalRemaining - lv.NoOfDays;
+                        mydb.SaveChanges();
+                    }
+                }
+            }
+        }
+
         private void SetGlobalVaribale()
-{
+        {
             using (var db = new TAS2013Entities())
             {
                 GlobalVaribales.ServerPath = db.Options.FirstOrDefault().ServerFilePath;

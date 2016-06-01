@@ -30,7 +30,7 @@ $('#byAll').change(function () {
         $("#ByEmpTypeDiv").hide();
         $("#ByEmpNoDiv").hide();
         $("#EmpInformition").hide();
-        
+        $("#radioValue").val("byAll");
     }
 });
 $('#byEmp').change(function () {
@@ -38,6 +38,8 @@ $('#byEmp').change(function () {
         $("#ByEmpNoDiv").show();
         $("#EmpInformition").show();
         $("#ByEmpTypeDiv").hide();
+        $("#radioValue").val("byEmp");
+        
     }
 });
 $('#byEmpType').change(function () {
@@ -45,6 +47,7 @@ $('#byEmpType').change(function () {
         $("#ByEmpTypeDiv").show();
         $("#ByEmpNoDiv").hide();
         $("#EmpInformition").hide();
+        $("#radioValue").val("byEmpType");
     }
 });
 $(document).ready(function () {

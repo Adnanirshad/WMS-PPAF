@@ -5,6 +5,9 @@ using System.Web;
 using System.Web.Mvc;
 using WMS.Models;
 using PagedList;
+using System.Data.Entity;
+using System.Data.Entity.Validation;
+using System.Text;
 namespace WMS.Controllers
 {
     public class LeaveSettingsController : Controller
@@ -30,43 +33,29 @@ namespace WMS.Controllers
             ViewBag.TypeID = new SelectList(db.EmpTypes.OrderBy(s => s.TypeName), "TypeID", "TypeName");
             List<Emp> _Emp = new List<Emp>();
             List<LvType> _lvType = new List<LvType>();
-           
-         
-            
-            //string di = Convert.ToString(Request.Form["CatID"].ToString());//CatID is 4,4
 
-            //int comma = di.IndexOf(',');
-            //string b = di;
-            //if (comma != -1)
-            //{
-            //    b = di.Substring(0, comma);//CatID is 4
-            //}
-            //byte catID = Convert.ToByte(Request.Form["CatID"].ToString());
-            //byte catID = Convert.ToByte(b);
-            string de = Request.Form["CreateLeaveCriteria"].ToString();
-            switch (de)
+
+            string rb = Request.Form["RBQuotaEmpSelection"].ToString();
+            switch (rb)
             {
+                case "byAll":
+                    _Emp = db.Emps.Where(aa => aa.Status==true).ToList();
 
-                //case "ByCategory":
-                //    int  catid = Convert.ToInt32(Request.Form["CatID"].ToString());
-                //    _Emp = db.Emps.Where(aa => aa.EmpType.CatID == catid).ToList();
-                  
-                //    break;
-                case "ByEmployee":
-                    string empNo = Request.Form["EmpNo"].ToString();
-                    _Emp = db.Emps.Where(aa => aa.EmpNo == empNo).ToList();
                     break;
-                case "ByEmpType":
-                   
+                case "byEmpType":
                     int EmpType = Convert.ToInt32(Request.Form["TypeID"].ToString());
                    _Emp = db.Emps.Where(aa => aa.TypeID == EmpType).ToList();
 
+                    break;
+                case "byEmp":
+                    string empNo = Request.Form["EmpNo"].ToString();
+                    _Emp = db.Emps.Where(aa => aa.EmpNo == empNo).ToList();                   
                     break;
             }
             User LoggedInUser = Session["LoggedUser"] as User;
             if (_Emp.Count > 0)
             {
-                _lvType = db.LvTypes.Where(aa => aa.Enable == true).ToList();
+                _lvType = db.LvTypes.Where(aa => aa.UpdateBalance == true).ToList();
                 GenerateLeaveQuotaAttributes(_Emp, _lvType, AL, CL, SL);
                 ViewBag.CMessage = "Leave Balance is created";
             }
@@ -279,7 +268,32 @@ namespace WMS.Controllers
             //}
             return View("Index");
         }
+        private void SaveChanges(DbContext context)
+        {
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (DbEntityValidationException ex)
+            {
+                StringBuilder sb = new StringBuilder();
 
+                foreach (var failure in ex.EntityValidationErrors)
+                {
+                    sb.AppendFormat("{0} failed validation\n", failure.Entry.Entity.GetType());
+                    foreach (var error in failure.ValidationErrors)
+                    {
+                        sb.AppendFormat("- {0} : {1}", error.PropertyName, error.ErrorMessage);
+                        sb.AppendLine();
+                    }
+                }
+
+                throw new DbEntityValidationException(
+                    "Entity Validation Failed - errors follow:\n" +
+                    sb.ToString(), ex
+                ); // Add the original exception as the innerException
+            }
+        }
         public void GenerateLeaveQuotaAttributes(List<Emp> _emp, List<LvType> _lvType,int AL,int CL,int SL)
         {
             using (var ctx = new TAS2013Entities())
@@ -293,9 +307,10 @@ namespace WMS.Controllers
                         List<LvConsumed> lvConsumedlvType = new List<LvConsumed>();
                         if (lvcon.Where(aa => aa.EmpLvTypeYear == empLvType).Count() == 0)
                         {
-                            string empType = emp.EmpID.ToString() + lvType.LvTypeID;
+                            string empType = emp.EmpID.ToString() + lvType.LvTypeID+DateTime.Today.Year.ToString("0000");
                             LvConsumed lvConsumed = new LvConsumed();
                             lvConsumed.EmpLvTypeYear = empType;
+                            lvConsumed.LvYear = DateTime.Today.Date.Year.ToString("0000");
                             lvConsumed.EmpID = emp.EmpID;
                             lvConsumed.LeaveTypeID = lvType.LvTypeID;
                             lvConsumed.JanConsumed = 0;
@@ -332,7 +347,7 @@ namespace WMS.Controllers
                                     break;
                             }
                             ctx.LvConsumeds.Add(lvConsumed);
-                            ctx.SaveChanges();
+                            SaveChanges(ctx);
                         }
                     }
                 }
@@ -473,10 +488,10 @@ namespace WMS.Controllers
 
                 }
             }
-            int pageSize = 10;
-            int pageNumber = (page ?? 1);
-            return View(_leavesQuotaModel.ToPagedList(pageNumber, pageSize));
-            //return View(_leavesQuotaModel);
+            //int pageSize = 10;
+            //int pageNumber = (page ?? 1);
+            //return View(_leavesQuotaModel.ToPagedList(pageNumber, pageSize));
+            return View(_leavesQuotaModel);
         }
     }
     public class LeaveQuotaModel

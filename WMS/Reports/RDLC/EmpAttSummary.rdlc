@@ -1520,7 +1520,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Remarks.Value</Value>
+                              <Value>=IIf(Fields!Remarks.Value="[DO]" Or Fields!Remarks.Value="[GZ]" Or Fields!Remarks.Value="[SL]" Or Fields!Remarks.Value="[AL]" Or Fields!Remarks.Value="[Absent]" Or Fields!Remarks.Value="[CL]",Fields!Remarks.Value,"")</Value>
                               <Style>
                                 <FontSize>7pt</FontSize>
                               </Style>
@@ -1546,6 +1546,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -2149,9 +2150,6 @@
                           <Color>White</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <TopBorder>
-                          <Color>Black</Color>
-                        </TopBorder>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>20pt</PaddingTop>
@@ -2188,9 +2186,6 @@
                           <Color>White</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <TopBorder>
-                          <Color>Black</Color>
-                        </TopBorder>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>20pt</PaddingTop>
@@ -2208,7 +2203,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Late Arrivals</Value>
+                              <Value>Weekends</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -2226,9 +2221,6 @@
                           <Color>White</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <TopBorder>
-                          <Color>Black</Color>
-                        </TopBorder>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>20pt</PaddingTop>
@@ -2241,14 +2233,14 @@
                 <TablixCell />
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox83">
+                    <Textbox Name="Textbox100">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Count(Microsoft.VisualBasic.Interaction.IIf(Fields!LateIn.Value &gt; 0, Fields!LateIn.Value, Nothing))</Value>
+                              <Value>=COUNT(IIf(Fields!StatusDO.Value =true and Fields!StatusGZ.Value =false, Fields!StatusDO.Value, Nothing))</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                               </Style>
@@ -2259,18 +2251,16 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox81</rd:DefaultName>
+                      <rd:DefaultName>Textbox100</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>White</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <TopBorder>
-                          <Color>Black</Color>
-                        </TopBorder>
+                        <VerticalAlign>Bottom</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>20pt</PaddingTop>
+                        <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
@@ -2285,7 +2275,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Rest Present</Value>
+                              <Value>Weekend Duty</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -2303,9 +2293,6 @@
                           <Color>White</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <TopBorder>
-                          <Color>Black</Color>
-                        </TopBorder>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>20pt</PaddingTop>
@@ -2343,9 +2330,6 @@
                           <Color>White</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <TopBorder>
-                          <Color>Black</Color>
-                        </TopBorder>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>20pt</PaddingTop>
@@ -2381,9 +2365,6 @@
                           <Color>White</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <TopBorder>
-                          <Color>Black</Color>
-                        </TopBorder>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>20pt</PaddingTop>
@@ -2394,7 +2375,7 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox134">
+                    <Textbox Name="Textbox220">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
@@ -2412,18 +2393,15 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox134</rd:DefaultName>
+                      <rd:DefaultName>Textbox220</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>White</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <TopBorder>
-                          <Color>Black</Color>
-                        </TopBorder>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>20pt</PaddingTop>
+                        <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
@@ -2503,19 +2481,18 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox146">
+                    <Textbox Name="Textbox208">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Absent</Value>
+                              <Value>Late Arrivals</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -2527,7 +2504,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox138</rd:DefaultName>
+                      <rd:DefaultName>Textbox208</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>White</Color>
@@ -2545,14 +2522,14 @@
                 <TablixCell />
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox99">
+                    <Textbox Name="Textbox219">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=COUNT(IIf(Fields!StatusAB.Value =true, Fields!StatusAB.Value, Nothing))</Value>
+                              <Value>=Count(Microsoft.VisualBasic.Interaction.IIf(Fields!LateIn.Value &gt; 0, Fields!LateIn.Value, Nothing))</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                               </Style>
@@ -2563,7 +2540,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox99</rd:DefaultName>
+                      <rd:DefaultName>Textbox219</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>White</Color>
@@ -2586,7 +2563,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>GZ Present</Value>
+                              <Value>Gazetted Present</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -2685,7 +2662,7 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox106">
+                    <Textbox Name="Textbox210">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
@@ -2699,11 +2676,11 @@
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Left</TextAlign>
+                            <TextAlign>Center</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox106</rd:DefaultName>
+                      <rd:DefaultName>Textbox210</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>White</Color>
@@ -2731,7 +2708,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Weekends</Value>
+                              <Value>Absent</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -2761,14 +2738,14 @@
                 <TablixCell />
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox100">
+                    <Textbox Name="Textbox102">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=COUNT(IIf(Fields!StatusDO.Value =true and Fields!StatusGZ.Value =false, Fields!StatusDO.Value, Nothing))</Value>
+                              <Value>=Count(Microsoft.VisualBasic.Interaction.IIf(Fields!StatusAB.Value = True, Fields!StatusAB.Value, Nothing))</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                               </Style>
@@ -2779,7 +2756,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox100</rd:DefaultName>
+                      <rd:DefaultName>Textbox99</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>White</Color>
@@ -2802,7 +2779,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>GZ Holiday</Value>
+                              <Value>Gazetted Holiday</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>

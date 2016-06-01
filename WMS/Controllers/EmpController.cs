@@ -573,8 +573,13 @@ namespace WMS.Controllers
         {
             try
             {
-                var q = from temp in db.EmpPhotoes where temp.EmpID == Id select temp.EmpPic;
-                byte[] cover = q.First();
+                byte[] cover;
+                List<EmpPhoto> eps = new List<EmpPhoto>();
+                eps = db.EmpPhotoes.Where(aa => aa.EmpID == Id).ToList();
+                if (eps.Count > 0)
+                    cover = eps.First().EmpPic;
+                else
+                    cover = null;
                 return cover;
             }
             catch (Exception ex)
@@ -785,10 +790,10 @@ namespace WMS.Controllers
                     DOB = emp.FirstOrDefault().JoinDate.Value.ToString("dd-MMM-yyyy");
                 if (lvConsumed.Count > 0)
                 {
-                    string emplvTypeCL = emp.First().EmpID.ToString() + "A";
-                    string emplvTypeAL = emp.First().EmpID.ToString() + "B";
-                    string emplvTypeSL = emp.First().EmpID.ToString() + "C";
-                    string emplvTypeCPL = emp.First().EmpID.ToString() + "E";
+                    string emplvTypeCL = emp.First().EmpID.ToString() + "A"+DateTime.Today.Year.ToString("0000");
+                    string emplvTypeAL = emp.First().EmpID.ToString() + "B" + DateTime.Today.Year.ToString("0000");
+                    string emplvTypeSL = emp.First().EmpID.ToString() + "C" + DateTime.Today.Year.ToString("0000");
+                    string emplvTypeCPL = emp.First().EmpID.ToString() + "E" + DateTime.Today.Year.ToString("0000");
                     string CL = lvConsumed.Where(aa => aa.EmpLvTypeYear == emplvTypeCL).First().YearRemaining.ToString();
                     string AL = lvConsumed.Where(aa => aa.EmpLvTypeYear == emplvTypeAL).First().YearRemaining.ToString();
                     string SL = lvConsumed.Where(aa => aa.EmpLvTypeYear == emplvTypeSL).First().YearRemaining.ToString();
