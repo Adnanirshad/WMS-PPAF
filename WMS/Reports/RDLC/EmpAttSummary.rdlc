@@ -1546,7 +1546,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -2556,14 +2555,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox178">
+                    <Textbox Name="Textbox167">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Gazetted Present</Value>
+                              <Value>Late Sitting</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -2575,7 +2574,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox178</rd:DefaultName>
+                      <rd:DefaultName>Textbox166</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>White</Color>
@@ -2594,14 +2593,14 @@
                 <TablixCell />
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox122">
+                    <Textbox Name="Textbox128">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Count(Microsoft.VisualBasic.Interaction.IIf(Fields!StatusGZOT.Value &gt; 0, Fields!StatusGZOT.Value, Nothing))</Value>
+                              <Value>=Count(Microsoft.VisualBasic.Interaction.IIf(Fields!LateOut.Value &gt; 0, Fields!LateOut.Value, Nothing))</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                               </Style>
@@ -2612,7 +2611,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox103</rd:DefaultName>
+                      <rd:DefaultName>Textbox105</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>White</Color>
@@ -2850,7 +2849,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Late Sitting</Value>
+                              <Value>Gazetted Present</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -2888,7 +2887,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Count(Microsoft.VisualBasic.Interaction.IIf(Fields!LateOut.Value &gt; 0, Fields!LateOut.Value, Nothing))</Value>
+                              <Value>=Count(Microsoft.VisualBasic.Interaction.IIf(Fields!StatusGZOT.Value &gt; 0, Fields!StatusGZOT.Value, Nothing))</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                               </Style>
