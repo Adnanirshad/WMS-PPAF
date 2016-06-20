@@ -160,7 +160,7 @@ namespace WMS.Controllers
                                     ModelState.AddModelError("FromDate", "Leave Monthly Quota Exceeds");
                             }
                             else
-                                ModelState.AddModelError("LvType", "Leave Balance Exceeds, Please check the balance");
+                                ModelState.AddModelError("LeaveTypeID", "Leave Balance Exceeds, Please check the balance");
                         }
                         else
                             ModelState.AddModelError("LvType", "Leave Quota does not exist");
