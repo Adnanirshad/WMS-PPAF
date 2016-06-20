@@ -37,7 +37,7 @@ namespace WMS.Controllers
             try
             {
                 SetGlobalVaribale();
-                if (CheckForValidLicense("Server"))
+                if (CheckForValidLicense("Client"))
                 {
                     if (Session["LogedUserID"] == null)
                     {

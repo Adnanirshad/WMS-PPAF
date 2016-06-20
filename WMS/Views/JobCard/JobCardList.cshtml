@@ -1,8 +1,96 @@
 ﻿
+@model PagedList.IPagedList<WMS.Models.ViewJobCardApp>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "JobCardList";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<p>
+</p>
+<div>
+    <div>
+      <form class ="form-inline" role="form">
+          <div class="form-group"> <h2>Job Cards</h2> </div>
+          <div class="form-group pull-right"  style="margin-top:15px">
+              @using (Html.BeginForm("JobCardList", "JobCard", FormMethod.Get))
+                {<p><span style="font-weight:bold">Find: </span>  @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control" } )  
+                    <input class="btn btn-sm btn-success" type="submit" value="Search" /></p>}
+          </div> 
+      </form>  
+       
+    </div>
 
-<h2>JobCardList</h2>
+  <div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover  table-condensed">
+            <tr class="table-header">
+                <th style="width:90px">
+                   FPID
+                </th>
+                <th>
+                    @Html.ActionLink("Name", "JobCardList", new { sortOrder = ViewBag.NameSortParm })
+                </th>
+                <th>
+                     @Html.ActionLink("Designation", "JobCardList", new { sortOrder = ViewBag.DesigSortParm })
+                </th>
+                <th>
+                     @Html.ActionLink("Section", "JobCardList", new { sortOrder = ViewBag.SectionSortParm })
+                </th>
+                 <th>
+                     Card Name
+                </th>
+                <th>
+                    From
+                </th>
+                <th>
+                    To
+                </th>
+                <th>
+                    Created By
+                </th>
+                 <th>
+                    Delete
+                </th>
+            </tr>
+            @foreach (var item in Model) {
+            <tr>
+               <td>
+                    @Html.DisplayFor(modelItem => item.EmpNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmpName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DesignationName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SectionName)
+                </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.WorkCardName)
+                </td>
+                <td>
+                     @item.DateStarted.Value.ToString("dd-MMM-yyyy")
+                </td>
+                <td>
+                     @item.DateEnded.Value.ToString("dd-MMM-yyyy")
+                </td>
+                <td>
+                     @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                 <td>
+                    @Html.ActionLink(" ", "DeleteJC", new { id=item.JobCardID } , new { @class = "glyphicon glyphicon-trash btn btn-danger btn-sm btn-EditViewDelete" })
+                </td>
+            </tr>
+        }
+        </table>
+    </div>
+    </div>
+
+</div>
+ <div class="form-inline">
+          <div class="form-group ">@Html.PagedListPager(Model, page => Url.Action("JobCardList", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))</div>
+          <div class="form-group pull-right">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</div>
+     </div>
 

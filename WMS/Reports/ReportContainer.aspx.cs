@@ -360,24 +360,28 @@ namespace WMS.Reports
 
         private string CalculateWorkDays(DateTime dts, DateTime dte, DataTable dataTable)
         {
+            TAS2013Entities db = new TAS2013Entities();
             string workDays = "0";
-            int _workDays = 0;
             int largeWorkDays = 0;
-            int count = 0;
-            foreach (DataRow row in dataTable.Rows)
+            int totalDays = 0;
+            while (dts <= dte)
             {
-                workDays = row["TotalWorkDays"].ToString();
-                int _cworkDays = Convert.ToInt32(workDays);
-                _workDays = _workDays + _cworkDays;
-                count = count + 1;
+                totalDays = totalDays + 1;
+                    if (db.Holidays.Where(hol => hol.HolDate.Month == dts.Month && hol.HolDate.Day == dts.Day).Count() > 0)
+                    {
+                        largeWorkDays=largeWorkDays+1;
+                    }
+                    else
+                    {
+                        if (dts.DayOfWeek == DayOfWeek.Sunday || dts.DayOfWeek == DayOfWeek.Saturday)
+                        {
+                            largeWorkDays = largeWorkDays + 1;
+                        }
+                    }
+                
+                dts = dts.AddDays(1);
             }
-            float per = 0;
-            if (count > 0)
-            {
-                per = _workDays / count;
-                int rounded = (int)Math.Round(per, 0);
-            }
-            return per.ToString("00"); ;
+            return (totalDays - largeWorkDays).ToString("00"); ;
         }
         public void AddValuesInEmpSummaryDT(string EmpNo, string EmpName, string unit, string Group, DateTime DateStart, DateTime DateEnd, string AvgTimeIn,
             string AvgTimeOut, string AvgWorkSpend, int TotalWD, string TotalP, string TotalA, string TotalLI, string LIPercent, int EmpID, string PresentPercent, string AbsentPercent, string EarlyOutCount, string EarlyOutPrecent,string LeaveCount,string LeavePercent)
@@ -430,8 +434,10 @@ namespace WMS.Reports
                                     else
                                     TotalAbsent = (float)(TotalAbsent + 0.5);
                                 }
-                                if (ad.TimeIn !=null && ad.StatusHL!=true)
+                                if (ad.TimeIn != null && ad.StatusHL != true)
+                                {
                                     TotalPresent = TotalPresent + 1;
+                                }
                             }
                             else
                             {

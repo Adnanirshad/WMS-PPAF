@@ -114,7 +114,7 @@ namespace WMS.Controllers
             User LoggedInUser = Session["LoggedUser"] as User;
             QueryBuilder qb = new QueryBuilder();
             string query = qb.MakeCustomizeQuery(LoggedInUser);
-            DataTable dt = qb.GetValuesfromDB("select * from ViewJobCardApp " + query);
+            DataTable dt = qb.GetValuesfromDB("select * from ViewJobCardApp ");
             List<ViewJobCardApp> jobCardsApps = dt.ToList<ViewJobCardApp>();
 
             // List<EmpView> emps = db.EmpViews.ToList();
