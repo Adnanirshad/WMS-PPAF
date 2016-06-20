@@ -18,7 +18,6 @@
          <div class="form-group">
             <div class="control-label col-md-2">Group</div>
             <div class="col-md-10">
-               @* <select class="btn btn-default dropdown-toggle dropdown ComboBoxWidth" id="DeptID" name="DeptID"></select>*@
                 @Html.DropDownList("DeptID", null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
                 @Html.ValidationMessageFor(model => model.DeptID)
             </div>
