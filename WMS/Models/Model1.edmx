@@ -274,9 +274,9 @@
       [ViewJobCardApp].[EmpID] AS [EmpID], 
       [ViewJobCardApp].[DeptID] AS [DeptID], 
       [ViewJobCardApp].[JobCardCriteria] AS [JobCardCriteria], 
-      [ViewJobCardApp].[CriteriaDate] AS [CriteriaDate], 
       [ViewJobCardApp].[Remarks] AS [Remarks], 
-      [ViewJobCardApp].[Deleted] AS [Deleted]
+      [ViewJobCardApp].[Deleted] AS [Deleted], 
+      [ViewJobCardApp].[CriteriaDate] AS [CriteriaDate]
       FROM [dbo].[ViewJobCardApp] AS [ViewJobCardApp]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ViewJobCardEmp" EntityType="TAS2015_PPAFModel.Store.ViewJobCardEmp" store:Type="Views" store:Schema="dbo" store:Name="ViewJobCardEmp">
@@ -1413,7 +1413,7 @@
           <Key>
             <PropertyRef Name="HolID" />
           </Key>
-          <Property Name="HolID" Type="smallint" Nullable="false" />
+          <Property Name="HolID" Type="smallint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="HolDate" Type="date" Nullable="false" />
           <Property Name="HolDesc" Type="varchar" Nullable="false" MaxLength="30" />
         </EntityType>
@@ -2111,9 +2111,9 @@
           <Property Name="EmpID" Type="int" Nullable="false" />
           <Property Name="DeptID" Type="smallint" Nullable="false" />
           <Property Name="JobCardCriteria" Type="char" MaxLength="1" />
-          <Property Name="CriteriaDate" Type="int" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="500" />
           <Property Name="Deleted" Type="bit" />
+          <Property Name="CriteriaDate" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'TAS2015_PPAF.dbo.ViewJobCardEmp' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -3773,7 +3773,7 @@
           <Key>
             <PropertyRef Name="HolID" />
           </Key>
-          <Property Type="Int16" Name="HolID" Nullable="false" />
+          <Property Type="Int16" Name="HolID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="DateTime" Name="HolDate" Nullable="false" Precision="0" />
           <Property Type="String" Name="HolDesc" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
         </EntityType>
@@ -4486,9 +4486,9 @@
           <Property Type="Int32" Name="EmpID" Nullable="false" />
           <Property Type="Int16" Name="DeptID" Nullable="false" />
           <Property Type="String" Name="JobCardCriteria" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Type="Int32" Name="CriteriaDate" />
           <Property Type="String" Name="Remarks" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Type="Boolean" Name="Deleted" />
+          <Property Type="Int32" Name="CriteriaDate" />
         </EntityType>
         <EntityType Name="ViewJobCardEmp">
           <Key>
@@ -6576,9 +6576,9 @@
           <EntitySetMapping Name="ViewJobCardApps">
             <EntityTypeMapping TypeName="TAS2015_PPAFModel.ViewJobCardApp">
               <MappingFragment StoreEntitySet="ViewJobCardApp">
+                <ScalarProperty Name="CriteriaDate" ColumnName="CriteriaDate" />
                 <ScalarProperty Name="Deleted" ColumnName="Deleted" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="CriteriaDate" ColumnName="CriteriaDate" />
                 <ScalarProperty Name="JobCardCriteria" ColumnName="JobCardCriteria" />
                 <ScalarProperty Name="DeptID" ColumnName="DeptID" />
                 <ScalarProperty Name="EmpID" ColumnName="EmpID" />

@@ -39,8 +39,8 @@ namespace WMS.Models
         public int EmpID { get; set; }
         public short DeptID { get; set; }
         public string JobCardCriteria { get; set; }
-        public Nullable<int> CriteriaDate { get; set; }
         public string Remarks { get; set; }
         public Nullable<bool> Deleted { get; set; }
+        public Nullable<int> CriteriaDate { get; set; }
     }
 }

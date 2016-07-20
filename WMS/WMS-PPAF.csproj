@@ -204,6 +204,7 @@
     <Content Include="Scripts\angular\Dashboard\jquery-jvectormap-1.2.2.min.js" />
     <Content Include="Scripts\angular\Dashboard\jquery-jvectormap-world-mill-en.js" />
     <Content Include="Scripts\angular\Dashboard\jquery.sparkline.min.js" />
+    <Content Include="Scripts\LoadEmpInfoJC.js" />
     <Content Include="Scripts\Dashboard\app.min.js" />
     <Content Include="Scripts\Dashboard\bootstrap.min.js" />
     <Content Include="Scripts\Dashboard\Chart.min.js" />
