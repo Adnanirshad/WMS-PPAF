@@ -395,9 +395,13 @@ namespace WMS.Controllers.EditAttendance
                         {
                             if (attendanceRecord.LateOut != null)
                             {
-                                attendanceRecord.OTMin = attendanceRecord.LateOut;
-                                attendanceRecord.StatusOT = true;
-                                attendanceRecord.Remarks = attendanceRecord.Remarks + "[N-OT]";
+                                if ((attendanceRecord.WorkMin - attendanceRecord.ShifMin) > shift.OverTimeMin)
+                                {
+                                    attendanceRecord.OTMin = (short)(attendanceRecord.WorkMin - attendanceRecord.ShifMin);
+                                    attendanceRecord.StatusOT = true;
+                                    attendanceRecord.Remarks = attendanceRecord.Remarks + "[N-OT]";
+                                }
+
                             }
                         }
                         //Subtract EarlyIn and LateOut from Work Minutes
