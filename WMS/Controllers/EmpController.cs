@@ -802,28 +802,28 @@ namespace WMS.Controllers
                         if (lvConsumed.Where(aa => aa.EmpLvTypeYear == emplvTypeCPL).First().YearRemaining != null)
                             CPL = lvConsumed.Where(aa => aa.EmpLvTypeYear == emplvTypeCPL).First().YearRemaining.ToString();
                     if (HttpContext.Request.IsAjaxRequest())
-                        return Json(emp.FirstOrDefault().EmpName + "@" + emp.FirstOrDefault().Designation.DesignationName + "@" +
-                            emp.FirstOrDefault().Section.SectionName + "@" + CL + "@" + AL + "@" + SL + "@" + CPL + "@" + emp.FirstOrDefault().FatherName
-                            + "@" + DOB
+                        return Json(emp.FirstOrDefault().EmpName + "sss" + emp.FirstOrDefault().Designation.DesignationName + "sss" +
+                            emp.FirstOrDefault().Section.SectionName + "sss" + CL + "sss" + AL + "sss" + SL + "sss" + CPL + "sss" + emp.FirstOrDefault().FatherName
+                            + "sss" + DOB
                            , JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
                     if (HttpContext.Request.IsAjaxRequest())
-                        return Json(emp.FirstOrDefault().EmpName + "@" + emp.FirstOrDefault().Designation.DesignationName + "@" +
-                            emp.FirstOrDefault().Section.SectionName + "@" + "No Quota" + "@" + "No Quota" + "@" + "No Quota" + "@" + "No Quota"
-                            + "@" + emp.FirstOrDefault().FatherName
-                            + "@" + DOB
+                        return Json(emp.FirstOrDefault().EmpName + "sss" + emp.FirstOrDefault().Designation.DesignationName + "sss" +
+                            emp.FirstOrDefault().Section.SectionName + "sss" + "No Quota" + "sss" + "No Quota" + "sss" + "No Quota" + "sss" + "No Quota"
+                            + "sss" + emp.FirstOrDefault().FatherName
+                            + "sss" + DOB
                            , JsonRequestBehavior.AllowGet);
                 }
             }
             else
             {
                 if (HttpContext.Request.IsAjaxRequest())
-                    return Json("Not found" + "@" + "Not found" + "@" +
-                        "Not found" + "@" + "No Quota" + "@" + "No Quota" + "@" + "No Quota" + "@" + "No Quota"
-                        + "@" + "Not found"
-                        + "@" + "Not found"
+                    return Json("Not found" + "sss" + "Not found" + "sss" +
+                        "Not found" + "sss" + "No Quota" + "sss" + "No Quota" + "sss" + "No Quota" + "sss" + "No Quota"
+                        + "sss" + "Not found"
+                        + "sss" + "Not found"
                        , JsonRequestBehavior.AllowGet);
             }
 
