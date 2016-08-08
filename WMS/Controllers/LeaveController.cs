@@ -139,6 +139,10 @@ namespace WMS.Controllers
                 string _EmpDate = lvappl.EmpID + datetime.Date.ToString("yyMMdd");
                 LvData _LVData = new LvData();
                 _LVData.EmpID = lvappl.EmpID;
+                if (lvappl.IsHalf == true)
+                    _LVData.HalfLeave = true;
+                else
+                    _LVData.HalfLeave = false;
                 _LVData.EmpDate = _EmpDate;
                 _LVData.Remarks = lvappl.LvReason;
                 _LVData.LvID = lvappl.LvID;

@@ -70,5 +70,8 @@ namespace WMS.Models
         public string Remarks { get; set; }
         public short DeptID { get; set; }
         public Nullable<bool> Deleted { get; set; }
+        public Nullable<double> PDays { get; set; }
+        public Nullable<double> ABDays { get; set; }
+        public Nullable<double> LeaveDays { get; set; }
     }
 }

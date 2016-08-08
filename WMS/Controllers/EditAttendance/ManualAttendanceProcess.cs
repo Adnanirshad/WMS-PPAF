@@ -235,6 +235,9 @@ namespace WMS.Controllers.EditAttendance
                 //Check if GZ holiday then place all WorkMin in GZOTMin
                 if (attendanceRecord.StatusGZ == true)
                 {
+                    attendanceRecord.PDays = 0;
+                    attendanceRecord.ABDays = 0;
+                    attendanceRecord.LeaveDays = 0;
                     attendanceRecord.GZOTMin = (short)mins.TotalMinutes;
                     attendanceRecord.WorkMin = (short)mins.TotalMinutes;
                     attendanceRecord.StatusGZOT = true;
@@ -245,6 +248,9 @@ namespace WMS.Controllers.EditAttendance
                 {
                     if (attendanceRecord.Emp.HasOT != false)
                     {
+                        attendanceRecord.PDays = 0;
+                        attendanceRecord.ABDays = 0;
+                        attendanceRecord.LeaveDays = 0;
                         attendanceRecord.OTMin = (short)mins.TotalMinutes;
                         attendanceRecord.WorkMin = (short)mins.TotalMinutes;
                         attendanceRecord.StatusOT = true;
@@ -413,6 +419,18 @@ namespace WMS.Controllers.EditAttendance
                                     attendanceRecord.WorkMin = attendanceRecord.ShifMin;
                                 }
                             }
+                        }
+                        if (attendanceRecord.StatusHL == true)
+                        {
+                            attendanceRecord.PDays = 0.5;
+                            attendanceRecord.ABDays = 0;
+                            attendanceRecord.LeaveDays = 0.5;
+                        }
+                        else
+                        {
+                            attendanceRecord.PDays = 1;
+                            attendanceRecord.ABDays = 0;
+                            attendanceRecord.LeaveDays = 0;
                         }
                         //Mark Absent if less than 4 hours
                         if (attendanceRecord.AttDate.Value.DayOfWeek != DayOfWeek.Friday && attendanceRecord.StatusDO != true && attendanceRecord.StatusGZ != true)
