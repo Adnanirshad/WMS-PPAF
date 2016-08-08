@@ -299,6 +299,18 @@ namespace WMS.Controllers
                     AttData _attdata = context.AttDatas.FirstOrDefault(aa => aa.EmpDate == _empDate);
                     if (_attdata != null)
                     {
+                        if (statusAB == true)
+                        {
+                            _attdata.PDays = 0;
+                            _attdata.LeaveDays = 0;
+                            _attdata.ABDays = 1;
+                        }
+                        if (statusP == true)
+                        {
+                            _attdata.PDays = 1;
+                            _attdata.LeaveDays = 0;
+                            _attdata.ABDays = 0;
+                        }
                         _attdata.DutyCode = dutyCode;
                         _attdata.StatusAB = statusAB;
                         _attdata.StatusDO = statusDO;

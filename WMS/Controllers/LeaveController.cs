@@ -94,10 +94,34 @@ namespace WMS.Controllers
                             _EmpAttData = context.AttDatas.First(aa => aa.EmpDate == _EmpDate);
                             _EmpAttData.LateIn = null;
                             _EmpAttData.LateOut = null;
+                            if (lvappl.IsHalf != true)
+                            {
+                                _EmpAttData.PDays = 0;
+                                _EmpAttData.ABDays = 0;
+                                _EmpAttData.LeaveDays = 1;
+                                _EmpAttData.StatusLeave = true;
+                                _EmpAttData.StatusHL = false;
+                            }
+                            else
+                            {
+                                if (_EmpAttData.WorkMin > 10)
+                                {
+                                    _EmpAttData.PDays = 0.5;
+                                    _EmpAttData.ABDays = 0;
+                                    _EmpAttData.LeaveDays = 0.5;
+                                }
+                                else
+                                {
+                                    _EmpAttData.PDays = 0;
+                                    _EmpAttData.ABDays = 0.5;
+                                    _EmpAttData.LeaveDays = 0.5;
+                                }
+                                _EmpAttData.StatusLeave = true;
+                                _EmpAttData.StatusHL = false;
+                            }
                             _EmpAttData.EarlyIn = null;
                             _EmpAttData.EarlyOut = null;
                             _EmpAttData.StatusAB= false;
-                            _EmpAttData.StatusLeave = true;
                             _EmpAttData.StatusEI = null;
                             _EmpAttData.StatusEO = null;
                             _EmpAttData.EarlyOut = null;
@@ -625,13 +649,17 @@ namespace WMS.Controllers
             {
                 using (var context = new TAS2013Entities())
                 {
-                    var _id = context.LvDatas.Where(aa => aa.EmpID == _EmpID && aa.AttDate == Date.Date).FirstOrDefault().EmpDate;
-                    if (_id != null)
+                    string EmpDate = _EmpID.ToString() + Date.ToString("yyMMdd");
+                    if (context.LvDatas.Where(aa => aa.EmpDate == EmpDate).Count() > 0)
                     {
-                        LvData lvvdata = context.LvDatas.Find(_id);
-                        //lvvdata.Active = false;
-                        context.LvDatas.Remove(lvvdata);
-                        context.SaveChanges();
+                        var _id = context.LvDatas.Where(aa => aa.EmpID == _EmpID && aa.AttDate == Date.Date).FirstOrDefault().EmpDate;
+                        if (_id != null)
+                        {
+                            LvData lvvdata = context.LvDatas.Find(_id);
+                            //lvvdata.Active = false;
+                            context.LvDatas.Remove(lvvdata);
+                            context.SaveChanges();
+                        }
                     }
                 }
                 Date = Date.AddDays(1);
@@ -857,7 +885,7 @@ namespace WMS.Controllers
             {
                 if (lvType.CountRestDays != true)
                 {
-                    Shift ss = db.Emps.Where(aa=>aa.EmpID==lvapplication.EmpID).First().Shift;
+                    Shift ss = db.Emps.Where(aa => aa.EmpID == lvapplication.EmpID).First().Shift;
                     DateTime dts = lvapplication.FromDate;
                     while (dts <= lvapplication.ToDate)
                     {
@@ -866,6 +894,16 @@ namespace WMS.Controllers
                         dts = dts.AddDays(1);
                     }
                 }
+                else
+                {
+                    DateTime dts = lvapplication.FromDate;
+                    while (dts <= lvapplication.ToDate)
+                    {
+                        val = val + 1;
+                        dts = dts.AddDays(1);
+                    }
+                }
+
             }
             return val;
         }

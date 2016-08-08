@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+@using (Html.BeginForm("SavePollData", "PollDataImport", FormMethod.Post))
+{
+    <div class="row" style="margin-left:10%; margin-bottom:3%">
+                    <div class="col-md-2">
+                        <label>Device ID</label>
+                    </div>
+                    <div class="col-md-2">
+
+                        <input id="EmpID" name="EmpID"  type="number" class="form-control" style="width:200px"/>
+                    </div>
+                </div>
+    if (ViewBag.Message != null)
+    {
+        <p>@ViewBag.Message</p>}
+    <input value="Submit" type="submit" class="btn btn-default"/>
+}

@@ -57,7 +57,7 @@
                         <li class="divider"></li>
                         <li><a href="~/Location">Locations</a></li>    
                         <li><a href="~/Roster">Rosters</a></li>    
-                        <li><a href="~/Option">Options</a></li>             
+                        <li><a href="~/Option">Options</a></li>                 
                         @if(Session["MUser"].ToString() == "1")
                         {
                         <li><a href="~/User">Users</a></li>
@@ -97,6 +97,7 @@
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-phone"></i>  Readers <b class="caret"></b></a>
                       <ul class="dropdown-menu">
                         <li><a href="~/Reader">Readers</a></li>
+                            <li><a href="~/PollDataImport">PollData Importer</a></li> 
                         @*<li><a href="~/ReaderType">Reader Types</a></li>
                         <li><a href="~/Vendor">Vendors</a></li>*@
                       </ul>
