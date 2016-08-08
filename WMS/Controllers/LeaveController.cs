@@ -621,13 +621,17 @@ namespace WMS.Controllers
             {
                 using (var context = new TAS2013Entities())
                 {
-                    var _id = context.LvDatas.Where(aa => aa.EmpID == _EmpID && aa.AttDate == Date.Date).FirstOrDefault().EmpDate;
-                    if (_id != null)
+                    string EmpDate = _EmpID.ToString() + Date.ToString("yyMMdd");
+                    if (context.LvDatas.Where(aa => aa.EmpDate == EmpDate).Count() > 0)
                     {
-                        LvData lvvdata = context.LvDatas.Find(_id);
-                        //lvvdata.Active = false;
-                        context.LvDatas.Remove(lvvdata);
-                        context.SaveChanges();
+                        var _id = context.LvDatas.Where(aa => aa.EmpID == _EmpID && aa.AttDate == Date.Date).FirstOrDefault().EmpDate;
+                        if (_id != null)
+                        {
+                            LvData lvvdata = context.LvDatas.Find(_id);
+                            //lvvdata.Active = false;
+                            context.LvDatas.Remove(lvvdata);
+                            context.SaveChanges();
+                        }
                     }
                 }
                 Date = Date.AddDays(1);
@@ -853,7 +857,7 @@ namespace WMS.Controllers
             {
                 if (lvType.CountRestDays != true)
                 {
-                    Shift ss = db.Emps.Where(aa=>aa.EmpID==lvapplication.EmpID).First().Shift;
+                    Shift ss = db.Emps.Where(aa => aa.EmpID == lvapplication.EmpID).First().Shift;
                     DateTime dts = lvapplication.FromDate;
                     while (dts <= lvapplication.ToDate)
                     {
@@ -862,6 +866,16 @@ namespace WMS.Controllers
                         dts = dts.AddDays(1);
                     }
                 }
+                else
+                {
+                    DateTime dts = lvapplication.FromDate;
+                    while (dts <= lvapplication.ToDate)
+                    {
+                        val = val + 1;
+                        dts = dts.AddDays(1);
+                    }
+                }
+
             }
             return val;
         }

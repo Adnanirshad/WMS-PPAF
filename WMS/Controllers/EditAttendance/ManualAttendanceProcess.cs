@@ -221,15 +221,14 @@ namespace WMS.Controllers.EditAttendance
             try
             {
                 //Calculate WorkMin
-                attendanceRecord.Remarks.Replace("[LI]", "");
-                attendanceRecord.Remarks.Replace("[EI]", "");
-                attendanceRecord.Remarks.Replace("[EO]", "");
-                attendanceRecord.Remarks.Replace("[LO]", "");
-                attendanceRecord.Remarks.Replace("[G-OT]", "");
-                attendanceRecord.Remarks.Replace("[R-OT]", "");
-                attendanceRecord.Remarks.Replace("[N-OT]", "");
-                attendanceRecord.Remarks.Replace("[Manual]", "");
-                attendanceRecord.Remarks = attendanceRecord.Remarks + "[Manual]";
+                attendanceRecord.Remarks=attendanceRecord.Remarks.Replace("[LI]", "");
+                attendanceRecord.Remarks = attendanceRecord.Remarks.Replace("[EI]", "");
+                attendanceRecord.Remarks = attendanceRecord.Remarks.Replace("[EO]", "");
+                attendanceRecord.Remarks = attendanceRecord.Remarks.Replace("[LO]", "");
+                attendanceRecord.Remarks = attendanceRecord.Remarks.Replace("[G-OT]", "");
+                attendanceRecord.Remarks = attendanceRecord.Remarks.Replace("[R-OT]", "");
+                attendanceRecord.Remarks = attendanceRecord.Remarks.Replace("[N-OT]", "");
+                attendanceRecord.Remarks = attendanceRecord.Remarks.Replace("[Manual]", "");
                 TimeSpan mins = (TimeSpan)(attendanceRecord.TimeOut - attendanceRecord.TimeIn);
                 attendanceRecord.WorkMin = (short)(mins.TotalMinutes);
                 //Check if GZ holiday then place all WorkMin in GZOTMin
@@ -239,6 +238,9 @@ namespace WMS.Controllers.EditAttendance
                     attendanceRecord.WorkMin = (short)mins.TotalMinutes;
                     attendanceRecord.StatusGZOT = true;
                     attendanceRecord.Remarks = attendanceRecord.Remarks + "[G-OT]";
+                    attendanceRecord.ABDays = 0;
+                    attendanceRecord.PDays = 0;
+                    attendanceRecord.LeaveDays = 0;
                 }
                 //if Rest day then place all WorkMin in OTMin
                 else if (attendanceRecord.StatusDO == true)
@@ -249,6 +251,9 @@ namespace WMS.Controllers.EditAttendance
                         attendanceRecord.WorkMin = (short)mins.TotalMinutes;
                         attendanceRecord.StatusOT = true;
                         attendanceRecord.Remarks = attendanceRecord.Remarks + "[R-OT]";
+                        attendanceRecord.ABDays = 0;
+                        attendanceRecord.PDays = 0;
+                        attendanceRecord.LeaveDays = 0;
                     }
                 }
                 else
@@ -261,6 +266,18 @@ namespace WMS.Controllers.EditAttendance
                     }
                     else
                     {
+                        if (attendanceRecord.StatusHL == true && attendanceRecord.StatusLeave != true)
+                        {
+                            attendanceRecord.ABDays = 0;
+                            attendanceRecord.PDays = 0.5;
+                            attendanceRecord.LeaveDays = 0.5;
+                        }
+                        else
+                        {
+                            attendanceRecord.ABDays = 0;
+                            attendanceRecord.PDays = 1;
+                            attendanceRecord.LeaveDays = 0;
+                        }
                         attendanceRecord.Remarks = attendanceRecord.Remarks.Replace("[Absent]", "");
                         attendanceRecord.StatusAB = false;
                         attendanceRecord.StatusP = true;
@@ -740,3 +757,4 @@ namespace WMS.Controllers.EditAttendance
 
     }
 }
+

@@ -52,7 +52,7 @@
                 <th>
                     Status
                 </th>
-                <th style="width:90px">Edit|View|Delete</th>
+                <th style="width:90px">Edit|Delete</th>
             </tr>
             @foreach (var item in Model) {
             <tr>
@@ -94,7 +94,7 @@
                 </td>
                 <td>
                     @Html.ActionLink(" ", "Edit", new { id=item.EmpID } , new { @class = "glyphicon glyphicon-pencil btn btn-warning btn-xs btn-EditViewDelete" })
-                    @Html.ActionLink(" ", "Details", new { id = item.EmpID }, new { @class = "glyphicon glyphicon-list btn btn-info btn-xs btn-EditViewDelete" }) 
+                    @*@Html.ActionLink(" ", "Details", new { id = item.EmpID }, new { @class = "glyphicon glyphicon-list btn btn-info btn-xs btn-EditViewDelete" })*@ 
                     @Html.ActionLink(" ", "Delete", new { id=item.EmpID }, new { @class = "glyphicon glyphicon-trash btn btn-danger btn-xs btn-EditViewDelete" })
                 </td>
             </tr>

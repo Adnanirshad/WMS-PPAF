@@ -152,7 +152,10 @@
       [ViewAttData].[ShifMin] AS [ShifMin], 
       [ViewAttData].[Remarks] AS [Remarks], 
       [ViewAttData].[DeptID] AS [DeptID], 
-      [ViewAttData].[Deleted] AS [Deleted]
+      [ViewAttData].[Deleted] AS [Deleted], 
+      [ViewAttData].[PDays] AS [PDays], 
+      [ViewAttData].[ABDays] AS [ABDays], 
+      [ViewAttData].[LeaveDays] AS [LeaveDays]
       FROM [dbo].[ViewAttData] AS [ViewAttData]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ViewDepartment" EntityType="TAS2015_PPAFModel.Store.ViewDepartment" store:Type="Views" store:Schema="dbo" store:Name="ViewDepartment">
@@ -961,6 +964,9 @@
           <Property Name="Tout14" Type="datetime" />
           <Property Name="Tin15" Type="datetime" />
           <Property Name="Tout15" Type="datetime" />
+          <Property Name="PDays" Type="float" />
+          <Property Name="ABDays" Type="float" />
+          <Property Name="LeaveDays" Type="float" />
         </EntityType>
         <EntityType Name="AttDataManEdit">
           <Key>
@@ -1885,7 +1891,6 @@
             <PropertyRef Name="DesignationName" />
             <PropertyRef Name="EmpNo" />
             <PropertyRef Name="EmpName" />
-            <PropertyRef Name="NicNo" />
             <PropertyRef Name="TypeName" />
             <PropertyRef Name="LocName" />
             <PropertyRef Name="ShiftName" />
@@ -1903,7 +1908,7 @@
           <Property Name="TypeID" Type="tinyint" />
           <Property Name="SecID" Type="smallint" />
           <Property Name="CardNo" Type="char" MaxLength="10" />
-          <Property Name="NicNo" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="NicNo" Type="nvarchar" MaxLength="50" />
           <Property Name="FatherName" Type="nvarchar" MaxLength="50" />
           <Property Name="JoinDate" Type="date" />
           <Property Name="Status" Type="bit" />
@@ -1948,6 +1953,9 @@
           <Property Name="Remarks" Type="varchar" MaxLength="100" />
           <Property Name="DeptID" Type="smallint" Nullable="false" />
           <Property Name="Deleted" Type="bit" />
+          <Property Name="PDays" Type="float" />
+          <Property Name="ABDays" Type="float" />
+          <Property Name="LeaveDays" Type="float" />
         </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'TAS2015_PPAF.dbo.ViewDepartment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -3297,6 +3305,9 @@
           <Property Type="DateTime" Name="Tout14" Precision="3" />
           <Property Type="DateTime" Name="Tin15" Precision="3" />
           <Property Type="DateTime" Name="Tout15" Precision="3" />
+          <Property Type="Double" Name="PDays" />
+          <Property Type="Double" Name="ABDays" />
+          <Property Type="Double" Name="LeaveDays" />
           <NavigationProperty Name="Emp" Relationship="TAS2015_PPAFModel.FK_AttData_Emp" FromRole="AttData" ToRole="Emp" />
         </EntityType>
         <EntityType Name="AttDataManEdit">
@@ -4272,7 +4283,6 @@
             <PropertyRef Name="DesignationName" />
             <PropertyRef Name="EmpNo" />
             <PropertyRef Name="EmpName" />
-            <PropertyRef Name="NicNo" />
             <PropertyRef Name="TypeName" />
             <PropertyRef Name="LocName" />
             <PropertyRef Name="ShiftName" />
@@ -4290,7 +4300,7 @@
           <Property Type="Byte" Name="TypeID" />
           <Property Type="Int16" Name="SecID" />
           <Property Type="String" Name="CardNo" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Type="String" Name="NicNo" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NicNo" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="FatherName" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="DateTime" Name="JoinDate" Precision="0" />
           <Property Type="Boolean" Name="Status" />
@@ -4335,6 +4345,9 @@
           <Property Type="String" Name="Remarks" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Type="Int16" Name="DeptID" Nullable="false" />
           <Property Type="Boolean" Name="Deleted" />
+          <Property Type="Double" Name="PDays" />
+          <Property Type="Double" Name="ABDays" />
+          <Property Type="Double" Name="LeaveDays" />
         </EntityType>
         <EntityType Name="ViewDepartment">
           <Key>
@@ -5389,6 +5402,9 @@
           <EntitySetMapping Name="AttDatas">
             <EntityTypeMapping TypeName="TAS2015_PPAFModel.AttData">
               <MappingFragment StoreEntitySet="AttData">
+                <ScalarProperty Name="LeaveDays" ColumnName="LeaveDays" />
+                <ScalarProperty Name="ABDays" ColumnName="ABDays" />
+                <ScalarProperty Name="PDays" ColumnName="PDays" />
                 <ScalarProperty Name="Tout15" ColumnName="Tout15" />
                 <ScalarProperty Name="Tin15" ColumnName="Tin15" />
                 <ScalarProperty Name="Tout14" ColumnName="Tout14" />
@@ -6416,6 +6432,9 @@
           <EntitySetMapping Name="ViewAttDatas">
             <EntityTypeMapping TypeName="TAS2015_PPAFModel.ViewAttData">
               <MappingFragment StoreEntitySet="ViewAttData">
+                <ScalarProperty Name="LeaveDays" ColumnName="LeaveDays" />
+                <ScalarProperty Name="ABDays" ColumnName="ABDays" />
+                <ScalarProperty Name="PDays" ColumnName="PDays" />
                 <ScalarProperty Name="Deleted" ColumnName="Deleted" />
                 <ScalarProperty Name="DeptID" ColumnName="DeptID" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
