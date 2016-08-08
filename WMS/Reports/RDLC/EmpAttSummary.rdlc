@@ -1689,7 +1689,16 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=IIf(Fields!Remarks.Value="[DO]" or Fields!Remarks.Value="[CP-Leave]" Or Fields!Remarks.Value="[GZ]" Or Fields!Remarks.Value="[SL]"   Or Fields!Remarks.Value="[AL]" Or Fields!Remarks.Value="[Absent]" Or Fields!Remarks.Value="[HCL]" Or Fields!Remarks.Value="[HSL]" Or Fields!Remarks.Value="[HAL]" Or Fields!Remarks.Value="[CL]" Or Fields!Remarks.Value="[Manual]",Fields!Remarks.Value,"")</Value>
+                                  <Value>=IIf(Fields!Remarks.Value="[DO]" or Fields!Remarks.Value="[CP-Leave]" Or Fields!Remarks.Value="[GZ]" Or Fields!Remarks.Value="[SL]"   
+Or Fields!Remarks.Value="[AL]" Or Fields!Remarks.Value="[Absent]" Or Fields!Remarks.Value="[HCL]" Or Fields!Remarks.Value="[HSL]" 
+Or Fields!Remarks.Value="[Ex-PL]"
+Or Fields!Remarks.Value="[Study]"
+Or Fields!Remarks.Value="[Optional Leave]"
+Or Fields!Remarks.Value="[Maternity Leave]"
+Or Fields!Remarks.Value="[Special]"
+Or Fields!Remarks.Value="[Recreational]"
+Or Fields!Remarks.Value="[Extraordinary]"
+Or Fields!Remarks.Value="[HAL]" Or Fields!Remarks.Value="[CL]" Or Fields!Remarks.Value="[Manual]",Fields!Remarks.Value,"")</Value>
                                   <Style>
                                     <FontSize>7pt</FontSize>
                                   </Style>
